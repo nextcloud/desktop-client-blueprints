@@ -21,6 +21,7 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["libs/qt5/qtquickcontrols2"] = None
         self.runtimeDependencies["libs/zlib"] = None
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
+        self.runtimeDependencies["libs/openssl"] = "1.1"
 
 class Package(CMakePackageBase):
     def __init__(self):
