@@ -33,8 +33,6 @@ class Package(CMakePackageBase):
         self.defines["company"] = "Nextcloud GmbH"
         self.applicationExecutable = "nextcloud"
 
-        self.blacklist.append(re.compile(r"bin[/|\\](?!" + self.applicationExecutable + r").*" + re.escape(CraftCore.compiler.executableSuffix)))
-
         self.ignoredPackages += ["binary/mysql"]
         if not CraftCore.compiler.isLinux:
             self.ignoredPackages += ["libs/dbus"]

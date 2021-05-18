@@ -3,54 +3,9 @@
 # general
 manifest/.*
 .*\.exp
-.*\.pdb
 .*\.la
 .*\.nsis
 .*\.prl
-
-# multiple docs
-doc/.*
-share/man/.*
-man/.*
-share/xml/.*
-share/locale/.*
-
-# cmake stuff
-share/apps/cmake/.*
-
-# common app stuff
-share/apps/ark/.*
-share/apps/kgpg/.*
-share/kf5/kdoctools/.*
-lib/.*
-bin/data/kpackage/kcms/(?!kcm_elisa_local_file).*
-bin/data/applications/.*
-bin/data/doc/.*
-bin/data/icons/.*
-bin/data/kf5/.*
-bin/data/knotifications5/.*
-bin/data/kpackage/(?!kcms).*
-bin/data/kservices5/(?!kcm_elisa_local_file.desktop).*
-bin/data/kservicetypes5/.*
-bin/data/man/.*
-bin/data/metainfo/.*
-bin/data/xdg/.*
-bin/data/xml/.*
-
-# Unused Qt modules
-qml/QtWebChannel
-qml/QtWebKit
-qml/QtTest
-qml/Qt3D
-qml/QtWebEngine
-qml/QtWebView
-qml/QtBluetooth
-qml/QtCharts
-qml/QtGamepad
-qml/QtCanvas3D
-qml/QtDataVisualization
-qml/QtLocation
-qml/QtNfc
 
 # unrelated
 dev-utils/.*
@@ -79,4 +34,4 @@ bin/qt\.conf
 bin/syncqt\.pl
 
 # strip most executables
-bin/(?!(elisa|dbus-daemon|dbus-launch|kbuildsycoca5|update-mime-database|kioslave)).*\.exe
+bin/(?!(nextcloud|nextcloudcmd)).*\.exe
