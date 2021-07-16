@@ -14,7 +14,7 @@ class subinfo(info.infoclass):
 
     def setDependencies(self):
         self.buildDependencies["dev-utils/cmake"] = None
-        self.buildDependencies["inkscape"] = "1.1"
+        self.buildDependencies["binary/inkscape"] = "1.1"
         self.runtimeDependencies["libs/qt5/qtbase"] = None
         self.runtimeDependencies["libs/qt5/qtdeclarative"] = None
         self.runtimeDependencies["libs/qt5/qtwebengine"] = None
