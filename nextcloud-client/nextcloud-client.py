@@ -50,7 +50,5 @@ class Package(CMakePackageBase):
         self.ignoredPackages += ["binary/mysql"]
         if not CraftCore.compiler.isLinux:
             self.ignoredPackages += ["libs/dbus"]
-        if CraftCore.compiler.isMacOs:
-            
 
         return super().createPackage()
