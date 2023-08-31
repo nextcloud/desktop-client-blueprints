@@ -26,6 +26,7 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["libs/qt5/qtgraphicaleffects"] = None
         self.runtimeDependencies["libs/qt5/qtmultimedia"] = None
         self.runtimeDependencies["libs/zlib"] = None
+        self.runtimeDependencies["libs/libp11"] = None
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
         self.runtimeDependencies["kde/frameworks/tier1/karchive"] = None
         self.runtimeDependencies["libs/openssl"] = "3.0"
