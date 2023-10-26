@@ -19,7 +19,8 @@ class subinfo(info.infoclass):
         self.buildDependencies["binary/inkscape"] = "1.1"
         self.runtimeDependencies["libs/qt5/qtbase"] = None
         self.runtimeDependencies["libs/qt5/qtdeclarative"] = None
-        #self.runtimeDependencies["libs/qt5/qtwebengine"] = None
+        if CraftCore.compiler.isLinux or CraftCore.compiler.isWindows:
+            self.runtimeDependencies["libs/qt5/qtwebengine"] = None
         self.runtimeDependencies["libs/qt5/qtwebsockets"] = None
         self.runtimeDependencies["libs/qt5/qtquickcontrols"] = None
         self.runtimeDependencies["libs/qt5/qtquickcontrols2"] = None
