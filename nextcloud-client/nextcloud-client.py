@@ -16,7 +16,6 @@ class subinfo(info.infoclass):
 
     def setDependencies(self):
         self.buildDependencies["dev-utils/cmake"] = None
-        self.buildDependencies["binary/inkscape"] = "1.1"
         self.runtimeDependencies["libs/qt5/qtbase"] = None
         self.runtimeDependencies["libs/qt5/qtdeclarative"] = None
         if CraftCore.compiler.isLinux or CraftCore.compiler.isWindows:
