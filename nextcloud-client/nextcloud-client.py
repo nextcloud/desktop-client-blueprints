@@ -16,15 +16,18 @@ class subinfo(info.infoclass):
 
     def setDependencies(self):
         self.buildDependencies["dev-utils/cmake"] = None
-        self.runtimeDependencies["libs/qt5/qtbase"] = None
-        self.runtimeDependencies["libs/qt5/qtdeclarative"] = None
-        if CraftCore.compiler.isLinux or CraftCore.compiler.isWindows:
-            self.runtimeDependencies["libs/qt5/qtwebengine"] = None
-        self.runtimeDependencies["libs/qt5/qtwebsockets"] = None
-        self.runtimeDependencies["libs/qt5/qtquickcontrols"] = None
-        self.runtimeDependencies["libs/qt5/qtquickcontrols2"] = None
-        self.runtimeDependencies["libs/qt5/qtgraphicaleffects"] = None
-        self.runtimeDependencies["libs/qt5/qtmultimedia"] = None
+        self.runtimeDependencies["libs/qt/qtbase"] = None
+        self.runtimeDependencies["libs/qt/qtdeclarative"] = None
+        if CraftCore.compiler.isLinux or CraftCore.compiler.isWindows or CraftPackageObject.get("libs/qt").instance.subinfo.options.dynamic.qtMajorVersion == "6":
+            self.runtimeDependencies["libs/qt/qtwebengine"] = None
+        self.runtimeDependencies["libs/qt/qtwebsockets"] = None
+        self.runtimeDependencies["libs/qt/qtmultimedia"] = None
+        self.runtimeDependencies["libs/qt/qtsvg"] = None
+        if CraftPackageObject.get("libs/qt").instance.subinfo.options.dynamic.qtMajorVersion == "6":
+            self.runtimeDependencies["libs/qt6/qt5compat"] = None
+        if CraftPackageObject.get("libs/qt").instance.subinfo.options.dynamic.qtMajorVersion == "5":
+            self.runtimeDependencies["libs/qt5/qtquickcontrols2"] = None
+            self.runtimeDependencies["libs/qt5/qtgraphicaleffects"] = None
         self.runtimeDependencies["libs/zlib"] = None
         self.runtimeDependencies["libs/libp11"] = None
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
