@@ -24,8 +24,8 @@ class subinfo(info.infoclass):
 
 
 class PackageMake(MakeFilePackageBase):
-    def __init__(self):
-        MakeFilePackageBase.__init__(self)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.subinfo.options.useShadowBuild = False
         self.subinfo.options.make.supportsMultijob = False
         self.subinfo.options.make.makeProgram = f"nmake.exe"
@@ -66,8 +66,8 @@ class PackageMake(MakeFilePackageBase):
 
 
 class PackageAutotools(AutoToolsPackageBase):
-    def __init__(self, **args):
-        AutoToolsPackageBase.__init__(self)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.subinfo.options.configure.autoreconf = False
 
 if CraftCore.compiler.isMSVC():
