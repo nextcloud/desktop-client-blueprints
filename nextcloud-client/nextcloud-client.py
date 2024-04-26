@@ -29,9 +29,6 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["kde/frameworks/tier1/karchive"] = None
         self.runtimeDependencies["libs/openssl"] = None
 
-        if OsUtils.isMac():
-            self.runtimeDependencies["libs/qt6/qtmacextras"] = None
-
 class Package(CMakePackageBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
