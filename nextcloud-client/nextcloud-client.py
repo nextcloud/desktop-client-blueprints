@@ -3,7 +3,7 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
-        self.options.dynamic.registerOption("osxArchs", "x86_64")
+        self.options.dynamic.registerOption("osxArchs", "arm64")
 
     def setTargets(self):
         self.svnTargets["master"] = "[git]https://github.com/nextcloud/desktop"
