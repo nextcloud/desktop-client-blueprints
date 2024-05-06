@@ -16,13 +16,15 @@ class subinfo(info.infoclass):
 
     def setDependencies(self):
         self.buildDependencies["dev-utils/cmake"] = None
-        self.runtimeDependencies["libs/qt6/qtbase"] = None
-        self.runtimeDependencies["libs/qt6/qtdeclarative"] = None
-        self.runtimeDependencies["libs/qt6/qtwebengine"] = None
-        self.runtimeDependencies["libs/qt6/qtwebsockets"] = None
-        self.runtimeDependencies["libs/qt6/qtmultimedia"] = None
-        self.runtimeDependencies["libs/qt/qtsvg"] = None
-        self.runtimeDependencies["libs/qt6/qt5compat"] = None
+        self.runtimeDependencies["libs/qt5/qtbase"] = None
+        self.runtimeDependencies["libs/qt5/qtdeclarative"] = None
+        if CraftCore.compiler.isLinux or CraftCore.compiler.isWindows:
+            self.runtimeDependencies["libs/qt5/qtwebengine"] = None
+        self.runtimeDependencies["libs/qt5/qtwebsockets"] = None
+        self.runtimeDependencies["libs/qt5/qtquickcontrols"] = None
+        self.runtimeDependencies["libs/qt5/qtquickcontrols2"] = None
+        self.runtimeDependencies["libs/qt5/qtgraphicaleffects"] = None
+        self.runtimeDependencies["libs/qt5/qtmultimedia"] = None
         self.runtimeDependencies["libs/zlib"] = None
         self.runtimeDependencies["libs/libp11"] = None
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
