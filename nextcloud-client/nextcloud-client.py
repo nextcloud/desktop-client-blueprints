@@ -7,6 +7,7 @@ class subinfo(info.infoclass):
 
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("buildMacOSBundle", True)
+            self.options.dynamic.registerOption("buildFileProviderModule", False)
     def setTargets(self):
         self.svnTargets["master"] = "[git]https://github.com/nextcloud/desktop"
 
@@ -39,6 +40,8 @@ class Package(CMakePackageBase):
             self.subinfo.options.configure.args += [f"-DCMAKE_OSX_ARCHITECTURES={self.subinfo.options.dynamic.osxArchs}"]
         if self.subinfo.options.dynamic.buildMacOSBundle:
             self.subinfo.options.configure.args += ["-DBUILD_OWNCLOUD_OSX_BUNDLE=ON"]
+        if self.subinfo.options.dynamic.buildFileProviderModule:
+            self.subinfo.options.configure.args += ["-DBUILD_FILE_PROVIDER_MODULE=ON"]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
