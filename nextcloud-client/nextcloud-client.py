@@ -5,6 +5,8 @@ class subinfo(info.infoclass):
     def registerOptions(self):
         self.options.dynamic.registerOption("osxArchs", "arm64")
 
+        if CraftCore.compiler.isMacOS:
+            self.options.dynamic.registerOption("buildMacOSBundle", True)
     def setTargets(self):
         self.svnTargets["master"] = "[git]https://github.com/nextcloud/desktop"
 
@@ -35,6 +37,8 @@ class Package(CMakePackageBase):
 
         if self.subinfo.options.dynamic.osxArchs:
             self.subinfo.options.configure.args += [f"-DCMAKE_OSX_ARCHITECTURES={self.subinfo.options.dynamic.osxArchs}"]
+        if self.subinfo.options.dynamic.buildMacOSBundle:
+            self.subinfo.options.configure.args += ["-DBUILD_OWNCLOUD_OSX_BUNDLE=ON"]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
