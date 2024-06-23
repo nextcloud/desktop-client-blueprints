@@ -3,6 +3,8 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
+        self.options.dynamic.registerOption("buildTests", True)
+
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
@@ -36,6 +38,12 @@ class subinfo(info.infoclass):
 class Package(CMakePackageBase):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        def boolToCmakeBool(value: bool) -> str:
+            return "ON" if value else "OFF"
+
+        buildTests = boolToCmakeBool(self.subinfo.options.dynamic.buildTests)
+        self.subinfo.options.configure.args += [f"-DBUILD_TESTING={buildTests}"]
 
         if self.subinfo.options.dynamic.osxArchs:
             self.subinfo.options.configure.args += [f"-DCMAKE_OSX_ARCHITECTURES={self.subinfo.options.dynamic.osxArchs}"]
