@@ -3,8 +3,6 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
-        self.options.dynamic.registerOption("buildTests", True)
-
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
@@ -42,17 +40,17 @@ class Package(CMakePackageBase):
         def boolToCmakeBool(value: bool) -> str:
             return "ON" if value else "OFF"
 
-        buildTests = boolToCmakeBool(self.subinfo.options.dynamic.buildTests)
-        self.subinfo.options.configure.args += [f"-DBUILD_TESTING={buildTests}"]
-
-        if self.subinfo.options.dynamic.osxArchs:
-            self.subinfo.options.configure.args += [f"-DCMAKE_OSX_ARCHITECTURES={self.subinfo.options.dynamic.osxArchs}"]
-        if self.subinfo.options.dynamic.buildMacOSBundle:
-            self.subinfo.options.configure.args += ["-DBUILD_OWNCLOUD_OSX_BUNDLE=ON"]
-        if self.subinfo.options.dynamic.buildFileProviderModule:
-            self.subinfo.options.configure.args += ["-DBUILD_FILE_PROVIDER_MODULE=ON"]
-        if self.subinfo.options.dynamic.sparkleLibPath != "":
-            self.subinfo.options.configure.args += [f"-DSPARKLE_LIBRARY={self.subinfo.options.dynamic.sparkleLibPath}"]
+        if CraftCore.compiler.isMacOS:
+            osxArchs = self.subinfo.options.dynamic.osxArchs
+            buildAppBundle = boolToCmakeBool(self.subinfo.options.dynamic.buildMacOSBundle)
+            buildFileProviderModule = boolToCmakeBool(self.subinfo.options.dynamic.buildFileProviderModule)
+            sparkleLibPath = self.subinfo.options.dynamic.sparkleLibPath
+            self.subinfo.options.configure.args += [
+                f"-DCMAKE_OSX_ARCHITECTURES={osxArchs}",
+                f"-DBUILD_OWNCLOUD_OSX_BUNDLE={buildAppBundle}",
+                f"-DBUILD_FILE_PROVIDER_MODULE={buildFileProviderModule}",
+                f"-DSPARKLE_LIBRARY={sparkleLibPath}"
+            ]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
