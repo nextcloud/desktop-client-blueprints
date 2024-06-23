@@ -3,9 +3,8 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
-        self.options.dynamic.registerOption("osxArchs", "arm64")
-
         if CraftCore.compiler.isMacOS:
+            self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
             self.options.dynamic.registerOption("buildFileProviderModule", False)
             self.options.dynamic.registerOption("sparkleLibPath", "")
