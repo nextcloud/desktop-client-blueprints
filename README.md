@@ -107,7 +107,7 @@ cmake ..\<desktop-cloned-repo> -G Ninja -DCMAKE_INSTALL_PREFIX=. -DCMAKE_PREFIX_
 ```
 9. Compile the desktop client
 ```
-cmake --build . --target install
+cmake --build .
 ```
 
 > [!NOTE]
