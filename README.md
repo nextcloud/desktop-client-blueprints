@@ -1,6 +1,6 @@
 # 🖥️ Nextcloud Desktop Client blueprints
 
-:blue_book: We decided to use [KDE Craft](https://community.kde.org/Craft) to get all binary dependencies of the [Nextcloud desktop client](https://github.com/nextcloud/desktop).
+:blue_book: We decided to use [KDE Craft](https://community.kde.org/Craft) to get all binary dependencies of the [Nextcloud files desktop client](https://github.com/nextcloud/desktop).
 
 ## System requirements
 
