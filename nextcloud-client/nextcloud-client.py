@@ -8,6 +8,8 @@ class subinfo(info.infoclass):
             self.options.dynamic.registerOption("buildMacOSBundle", True)
             self.options.dynamic.registerOption("buildFileProviderModule", False)
             self.options.dynamic.registerOption("sparkleLibPath", "")
+            self.options.dynamic.registerOption("overrideServerUrl", "")
+            self.options.dynamic.registerOption("forceOverrideServerUrl", False)
 
     def setTargets(self):
         self.svnTargets["master"] = "[git]https://github.com/nextcloud/desktop"
@@ -45,11 +47,15 @@ class Package(CMakePackageBase):
             buildAppBundle = boolToCmakeBool(self.subinfo.options.dynamic.buildMacOSBundle)
             buildFileProviderModule = boolToCmakeBool(self.subinfo.options.dynamic.buildFileProviderModule)
             sparkleLibPath = self.subinfo.options.dynamic.sparkleLibPath
+            overrideServerUrl = self.subinfo.options.dynamic.overrideServerUrl
+            forceOverrideServerUrl = "ON" if self.subinfo.options.dynamic.forceOverrideServerUrl == True else "OFF"
             self.subinfo.options.configure.args += [
                 f"-DCMAKE_OSX_ARCHITECTURES={osxArchs}",
                 f"-DBUILD_OWNCLOUD_OSX_BUNDLE={buildAppBundle}",
                 f"-DBUILD_FILE_PROVIDER_MODULE={buildFileProviderModule}",
-                f"-DSPARKLE_LIBRARY={sparkleLibPath}"
+                f"-DSPARKLE_LIBRARY={sparkleLibPath}",
+                f"-DAPPLICATION_SERVER_URL={overrideServerUrl}",
+                f"-DAPPLICATION_SERVER_URL_ENFORCE={forceOverrideServerUrl}"
             ]
 
     def createPackage(self):
