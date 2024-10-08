@@ -54,9 +54,12 @@ class Package(CMakePackageBase):
                 f"-DBUILD_OWNCLOUD_OSX_BUNDLE={buildAppBundle}",
                 f"-DBUILD_FILE_PROVIDER_MODULE={buildFileProviderModule}",
                 f"-DSPARKLE_LIBRARY={sparkleLibPath}",
-                f"-DAPPLICATION_SERVER_URL={overrideServerUrl}",
                 f"-DAPPLICATION_SERVER_URL_ENFORCE={forceOverrideServerUrl}"
             ]
+            # Make sure we do not set the application server url to empty if it is not set, this can
+            # unintentionally break our use of NEXTCLOUD.cmake
+            if overrideServerUrl:
+                self.subinfo.options.configure.args += [f"-DAPPLICATION_SERVER_URL={overrideServerUrl}"]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
