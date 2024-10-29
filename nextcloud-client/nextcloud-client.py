@@ -3,13 +3,13 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
+        self.options.dynamic.registerOption("overrideServerUrl", "")
+        self.options.dynamic.registerOption("forceOverrideServerUrl", False)
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
             self.options.dynamic.registerOption("buildFileProviderModule", False)
             self.options.dynamic.registerOption("sparkleLibPath", "")
-            self.options.dynamic.registerOption("overrideServerUrl", "")
-            self.options.dynamic.registerOption("forceOverrideServerUrl", False)
 
     def setTargets(self):
         self.svnTargets["master"] = "[git]https://github.com/nextcloud/desktop"
