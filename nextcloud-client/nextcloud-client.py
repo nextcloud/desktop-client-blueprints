@@ -3,6 +3,7 @@ from Package.CMakePackageBase import *
 
 class subinfo(info.infoclass):
     def registerOptions(self):
+        self.options.dynamic.registerOption("devMode", False)
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
@@ -48,6 +49,7 @@ class Package(CMakePackageBase):
             buildFileProviderModule = boolToCmakeBool(self.subinfo.options.dynamic.buildFileProviderModule)
             sparkleLibPath = self.subinfo.options.dynamic.sparkleLibPath
             overrideServerUrl = self.subinfo.options.dynamic.overrideServerUrl
+            devMode = self.subinfo.options.dynamic.devMode
             self.subinfo.options.configure.args += [
                 f"-DCMAKE_OSX_ARCHITECTURES={osxArchs}",
                 f"-DBUILD_OWNCLOUD_OSX_BUNDLE={buildAppBundle}",
@@ -62,7 +64,8 @@ class Package(CMakePackageBase):
                     f"-DAPPLICATION_SERVER_URL={overrideServerUrl}",
                     f"-DAPPLICATION_SERVER_URL_ENFORCE={forceOverrideServerUrl}"
                 ]
-
+            if devMode:
+                self.subinfo.options.configure.args += [f"-DNEXTCLOUD_DEV=ON"]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
