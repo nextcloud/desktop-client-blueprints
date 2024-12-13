@@ -46,30 +46,33 @@ class Package(CMakePackageBase):
 
         devMode = self.subinfo.options.dynamic.devMode
         versionSuffix = self.subinfo.options.dynamic.versionSuffix
+        overrideServerUrl = self.subinfo.options.dynamic.overrideServerUrl
+
+        # Make sure we do not set the application server url to empty if it is not set, this can
+        # unintentionally break our use of NEXTCLOUD.cmake
+        if overrideServerUrl:
+            forceOverrideServerUrl = "ON" if self.subinfo.options.dynamic.forceOverrideServerUrl == True else "OFF"
+            self.subinfo.options.configure.args += [
+                f"-DAPPLICATION_SERVER_URL={overrideServerUrl}",
+                f"-DAPPLICATION_SERVER_URL_ENFORCE={forceOverrideServerUrl}"
+            ]
+
+        if devMode:
+            self.subinfo.options.configure.args += [f"-DNEXTCLOUD_DEV=ON"]
+
+        self.subinfo.options.configure.args += [f"-DMIRALL_VERSION_SUFFIX={versionSuffix}"]
 
         if CraftCore.compiler.isMacOS:
             osxArchs = self.subinfo.options.dynamic.osxArchs
             buildAppBundle = boolToCmakeBool(self.subinfo.options.dynamic.buildMacOSBundle)
             buildFileProviderModule = boolToCmakeBool(self.subinfo.options.dynamic.buildFileProviderModule)
             sparkleLibPath = self.subinfo.options.dynamic.sparkleLibPath
-            overrideServerUrl = self.subinfo.options.dynamic.overrideServerUrl
             self.subinfo.options.configure.args += [
                 f"-DCMAKE_OSX_ARCHITECTURES={osxArchs}",
                 f"-DBUILD_OWNCLOUD_OSX_BUNDLE={buildAppBundle}",
                 f"-DBUILD_FILE_PROVIDER_MODULE={buildFileProviderModule}",
                 f"-DSPARKLE_LIBRARY={sparkleLibPath}",
             ]
-            # Make sure we do not set the application server url to empty if it is not set, this can
-            # unintentionally break our use of NEXTCLOUD.cmake
-            if overrideServerUrl:
-                forceOverrideServerUrl = "ON" if self.subinfo.options.dynamic.forceOverrideServerUrl == True else "OFF"
-                self.subinfo.options.configure.args += [
-                    f"-DAPPLICATION_SERVER_URL={overrideServerUrl}",
-                    f"-DAPPLICATION_SERVER_URL_ENFORCE={forceOverrideServerUrl}"
-                ]
-        if devMode:
-            self.subinfo.options.configure.args += [f"-DNEXTCLOUD_DEV=ON"]
-        self.subinfo.options.configure.args += [f"-DMIRALL_VERSION_SUFFIX={versionSuffix}"]
 
     def createPackage(self):
         self.blacklist_file.append(os.path.join(self.packageDir(), 'blacklist.txt'))
