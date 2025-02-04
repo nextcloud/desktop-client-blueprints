@@ -3,6 +3,7 @@ import info
 import shutil
 from Package.AutoToolsPackageBase import *
 from Package.MakeFilePackageBase import *
+from Utils import CraftHash
 
 
 class subinfo(info.infoclass):
