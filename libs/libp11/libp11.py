@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import info
+import os
 import shutil
+import utils
+from CraftCompiler import CraftCompiler
 from Package.AutoToolsPackageBase import *
 from Package.MakeFilePackageBase import *
 from Utils import CraftHash
