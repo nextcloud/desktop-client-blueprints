@@ -10,7 +10,7 @@ jobs:
       CRAFT_TARGET: windows-msvc2022_64-cl
       CRAFT_MASTER_LOCATION: ${{ github.workspace }}\CraftMaster
       DESKTOP_CLIENT_MASTER_LOCATION: ${{ github.workspace }}\desktop
-      CRAFT_MASTER_CONFIG: ${{ env.DESKTOP_CLIENT_MASTER_LOCATION }}\craftmaster.ini
+      CRAFT_MASTER_CONFIG: ${{ github.workspace }}\desktop\craftmaster.ini
     steps:
       - uses: actions/checkout@v4
         with:
