@@ -3,6 +3,7 @@ import info
 import os
 import shutil
 import utils
+from CraftBase import CraftBase
 from CraftCompiler import CraftCompiler
 from Package.AutoToolsPackageBase import *
 from Package.MakeFilePackageBase import *
@@ -24,7 +25,11 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["virtual/base"] = None
         self.buildDependencies["libs/openssl"] = None
         self.buildDependencies["dev-utils/msys"] = None
-        self.buildDependencies["dev-utils/pkg-config"] = None
+        if CraftBase.cacheVersion() == "25.03-nc":
+            # support building libp11 with older cache versions if needed
+            self.buildDependencies["dev-utils/pkg-config"] = None
+        else:
+            self.buildDependencies["dev-utils/pkgconf"] = None
 
 
 class PackageMake(MakeFilePackageBase):
