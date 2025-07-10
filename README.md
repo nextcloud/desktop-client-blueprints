@@ -88,6 +88,10 @@ craft --install-deps nextcloud-client
 > ```
 > set "PATH=C:\CraftRoot\bin;C:\CraftRoot\dev-utils\bin;%PATH%"
 > ```
+> You also need to set the Qt path for plugins via an environment variable
+> ```
+> set "QT_PLUGIN_PATH=C:\CraftRoot\bin\plugins"
+> ```
 > This will result in using the `cmake` version downloaded with `KDE Craft`.
 5. Clone the desktop client repository.
 ```
