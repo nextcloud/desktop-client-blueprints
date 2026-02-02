@@ -33,6 +33,7 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["libs/qt6/qt5compat"] = None
         self.runtimeDependencies["libs/zlib"] = None
         self.runtimeDependencies["libs/libp11"] = None
+        self.runtimeDependencies["libs/kdsingleapplication"] = None
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
         self.runtimeDependencies["kde/frameworks/tier1/karchive"] = None
         self.runtimeDependencies["libs/openssl"] = None
