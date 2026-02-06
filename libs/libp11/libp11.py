@@ -12,14 +12,15 @@ from Utils import CraftHash
 
 class subinfo(info.infoclass):
     def setTargets(self):
-        for ver in ["libp11-0.4.12"]:
+        for ver in ["libp11-0.4.12", "libp11-0.4.17"]:
             self.targets[ver] = f"https://github.com/OpenSC/libp11/releases/download/{ver}/{ver}.tar.gz"
             self.targetInstSrc[ver] = ver
 
         self.targetDigests["libp11-0.4.12"] = (["1e1a2533b3fcc45fde4da64c9c00261b1047f14c3f911377ebd1b147b3321cfd"], CraftHash.HashAlgorithm.SHA256)
+        self.targetDigests["libp11-0.4.17"] = (["bbd86cdadd0493304be85c01a8604988c8f6c3fff8a902aa3f542a924699c080"], CraftHash.HashAlgorithm.SHA256)
 
         self.description = "A library to handle PKCS#11 cryptographic modules"
-        self.defaultTarget = "libp11-0.4.12"
+        self.defaultTarget = "libp11-0.4.17"
 
     def setDependencies(self):
         self.runtimeDependencies["virtual/base"] = None
