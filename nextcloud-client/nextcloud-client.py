@@ -5,6 +5,7 @@ class subinfo(info.infoclass):
     def registerOptions(self):
         self.options.dynamic.registerOption("devMode", False)
         self.options.dynamic.registerOption("versionSuffix", "")
+        self.options.dynamic.registerOption("buildWithWebEngine", True)
         if CraftCore.compiler.isMacOS:
             self.options.dynamic.registerOption("osxArchs", "arm64")
             self.options.dynamic.registerOption("buildMacOSBundle", True)
@@ -26,7 +27,10 @@ class subinfo(info.infoclass):
         self.buildDependencies["dev-utils/cmake"] = None
         self.runtimeDependencies["libs/qt6/qtbase"] = None
         self.runtimeDependencies["libs/qt6/qtdeclarative"] = None
-        self.runtimeDependencies["libs/qt6/qtwebengine"] = None
+
+        if self.options.dynamic.buildWithWebEngine:
+            self.runtimeDependencies["libs/qt6/qtwebengine"] = None
+
         self.runtimeDependencies["libs/qt6/qtwebsockets"] = None
         self.runtimeDependencies["libs/qt6/qtmultimedia"] = None
         self.runtimeDependencies["libs/qt/qtsvg"] = None
@@ -62,6 +66,9 @@ class Package(CMakePackageBase):
             self.subinfo.options.configure.args += [f"-DNEXTCLOUD_DEV=ON"]
 
         self.subinfo.options.configure.args += [f"-DMIRALL_VERSION_SUFFIX={versionSuffix}"]
+
+        buildWithWebEngine = boolToCmakeBool(self.subinfo.options.dynamic.buildWithWebEngine)
+        self.subinfo.options.configure.args += [f"-DBUILD_WITH_WEBENGINE={buildWithWebEngine}"]
 
         if CraftCore.compiler.isMacOS:
             osxArchs = self.subinfo.options.dynamic.osxArchs
