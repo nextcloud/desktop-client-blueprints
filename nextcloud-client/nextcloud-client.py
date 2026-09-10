@@ -30,10 +30,6 @@ class subinfo(info.infoclass):
         self.buildDependencies["dev-utils/cmake"] = None
         self.runtimeDependencies["libs/qt6/qtbase"] = None
         self.runtimeDependencies["libs/qt6/qtdeclarative"] = None
-
-        if self.options.dynamic.buildWithWebEngine:
-            self.runtimeDependencies["libs/qt6/qtwebengine"] = None
-
         self.runtimeDependencies["libs/qt6/qtwebsockets"] = None
         self.runtimeDependencies["libs/qt/qtsvg"] = None
         self.runtimeDependencies["libs/qt6/qt5compat"] = None
@@ -71,9 +67,6 @@ class Package(CMakePackageBase):
             self.subinfo.options.configure.args += [f"-DNEXTCLOUD_DEV=ON"]
 
         self.subinfo.options.configure.args += [f"-DMIRALL_VERSION_SUFFIX={versionSuffix}"]
-
-        buildWithWebEngine = boolToCmakeBool(self.subinfo.options.dynamic.buildWithWebEngine)
-        self.subinfo.options.configure.args += [f"-DBUILD_WITH_WEBENGINE={buildWithWebEngine}"]
 
         if CraftCore.compiler.isMacOS:
             osxArchs = self.subinfo.options.dynamic.osxArchs
